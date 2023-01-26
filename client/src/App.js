@@ -1,12 +1,12 @@
-import "./index.css";
-import './App.css';
+import './index.css';
+import Navbar from './components/navbar/Navbar';
+
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        Hello World
-      </header>
+    <div className="">
+      <Navbar/>
+      <header>Photoshare</header>
     </div>
   );
 }
