@@ -5,7 +5,7 @@ a photo sharing social media app
 To start the client
 1. cd into client directory  
 2. install dependencies: ```npm i```  
-3. start client: ```npm start```  
+3. start client: ```npm run dev```  
 
 ## Server (Back-end)
 To start the server
