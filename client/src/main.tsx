@@ -11,10 +11,9 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <div>Error 404 page not found</div>
+    errorElement: <div>Error 404 page not found</div>,
   },
 ])
-
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

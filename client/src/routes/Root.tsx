@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import reactLogo from '../assets/react.svg'
 import '../Root.css'
+import Gallery from '../components/Gallery';
 import Post from '../components/Post';
+import Sidebar from '../components/Sidebar';
 
 function Root() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <Post />
+    <div className="flex flex-row h-screen">
+      <Sidebar />
+      <Gallery />
     </div>
   )
 }
