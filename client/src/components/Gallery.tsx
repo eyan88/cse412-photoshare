@@ -16,7 +16,7 @@ const Gallery = () => {
     // get all distinct posts from database and map to array
     // then do a Array.map function to render Posts components
     const getGallery = () => {
-        const updatedPosts = [firstPost];
+        const updatedPosts = [firstPost, firstPost, firstPost];
         setGallery(updatedPosts);
     };
 

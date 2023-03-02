@@ -3,6 +3,8 @@ import React from 'react';
 const Post = () => {
 
     return (
+        <Link>
+
         <div className="max-w-sm w-full lg:flex">
             <div className="lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
                 <img className="object-center max-w-sm" src="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt30cd60b083954711/634896353b9a3d285e1b6cc1/patch508_Banner.jpg"></img>
@@ -20,6 +22,7 @@ const Post = () => {
                 </div>
             </div>
         </div>
+        </Link>
     )
 }
 
