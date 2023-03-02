@@ -12,6 +12,12 @@ const router = createBrowserRouter([
     path: '/',
     element: <Root />,
     errorElement: <div>Error 404 page not found</div>,
+    children: [
+      {
+        path: '/posts/:id',
+        element: <div></div>
+      },
+    ]
   },
 ])
 
