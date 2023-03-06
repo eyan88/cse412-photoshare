@@ -29,7 +29,6 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
                         </div>
                     </div>
                 </div>
-
             </div>
         </Link>
     )
