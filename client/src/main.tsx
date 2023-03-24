@@ -4,7 +4,9 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
-import Root from './routes/Root'
+import Root from './routes/Root';
+import Login from './routes/Login';
+import Gallery from './components/Gallery';
 import './index.css'
 
 const router = createBrowserRouter([
@@ -14,9 +16,20 @@ const router = createBrowserRouter([
     errorElement: <div>Error 404 page not found</div>,
     children: [
       {
-        path: '/posts/:id',
-        element: <div></div>
+        path: '/gallery',
+        element: <Gallery />,
+        children: [
+
+        ]
       },
+      {
+        path: '/posts/:photo_id',
+        element: <div>This is where a post should go</div>
+      },
+      {
+        path: '/loginpage',
+        element: <Login />,
+      }
     ]
   },
 ])

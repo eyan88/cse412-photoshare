@@ -1,7 +1,18 @@
 const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+
+
 const app = express();
+const postRouter = require('../routes/postRouter');
+const userRouter = require('../routes/userRouter');
 
 const PORT = process.env.PORT || 5000;
+
+app.use(express.json());
+app.use(cors());
+app.use('/api/posts', postRouter);
+app.use('/api/users', userRouter);
 
 app.get('/',(req, res) => {
     res.send("Hello world");
