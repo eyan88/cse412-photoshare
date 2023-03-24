@@ -7,7 +7,7 @@ import Sidebar from '../components/Sidebar';
 function Root() {
 
   return (
-    <div className="flex flex-row h-screen">
+    <div className="flex flex-col w-screen">
       <Sidebar />
       <Outlet />
     </div>
