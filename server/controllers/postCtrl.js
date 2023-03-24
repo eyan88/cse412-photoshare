@@ -1,5 +1,4 @@
 const { response } = require('express');
-const db = require('../db/queries');
 
 const postCtrl = {
     getPosts: async (req, res) => {
