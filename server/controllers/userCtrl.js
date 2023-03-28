@@ -1,6 +1,9 @@
 const { response } = require('express');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+
+// Unique IDs will be generated with this (not using SERIAL command for postgres)
+// except for users table (dont want to restructure the entire table)
+const uniqid = require('uniqid');
 
 const Pool = require("pg").Pool;
 
@@ -11,6 +14,21 @@ const pool = new Pool({
   password: "password",
   port: 5432,
 });
+
+async function hashPassword(password) {
+    const saltRounds = 10;
+    const hashedPassword = await new Promise((resolve, reject) => {
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(hash);
+        });
+    });
+    return hashedPassword;
+}
+
+// TODO: add update user function to update user credentials and information
 
 const userCtrl = {
     getUsers: async (req, res) => {
@@ -31,24 +49,21 @@ const userCtrl = {
         });
     },
     createUser: async (req, res) => {
-        const { user_id, first_name, last_name, email, password, date_of_birth, hometown, gender } = req.body;
-        bcrypt.hash(password, saltRounds, (err, hash) => {
+        const { first_name, last_name, email, password, date_of_birth, hometown, gender } = req.body;
+
+        const hash = await hashPassword(password);
+        await pool.query(`INSERT INTO users(first_name, last_name, email, password, date_of_birth, hometown, gender, user_id)
+        VALUES('${first_name}', '${last_name}', '${email}', '${hash}', '${date_of_birth}', '${hometown}', '${gender}', DEFAULT)`, (err, result) => {
             if (err) {
                 throw err;
             }
-            pool.query(`INSERT INTO users(user_id, first_name, last_name, email, password, date_of_birth, hometown, gender)
-            VALUES(${user_id}, '${first_name}', '${last_name}', '${email}', '${hash}', '${date_of_birth}', '${hometown}', '${gender}')`, (err, result) => {
-                if (err) {
-                    throw err;
-                }
-                res.status(201).json('user created successfully');
-            });
+            res.status(201).json('user created successfully');
         });
     },
     deleteUser: async (req, res) => {
         const id = parseInt(req.params.id);
 
-        pool.query(`DELETE FROM users WHERE user_id = ${id}`, (err, result) => {
+        await pool.query(`DELETE FROM users WHERE user_id = ${id}`, (err, result) => {
             if (err) {
                 throw err;
             }
