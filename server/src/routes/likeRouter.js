@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const postCtrl = require('../controllers/postCtrl');
+const likeCtrl = require('../controllers/likeCtrl');
 const auth = require('../middleware/auth');
 
 router.route('/')
-    .get(postCtrl.getAllPosts)
-    .post(postCtrl.createPost);
+    .get(likeCtrl.getAllPosts)
+    .post(likeCtrl.createPost);
 
 router.route('/:id')
-    .get(postCtrl.getPostsByUserId);
+    .get(likeCtrl.getPostsByUserId);
 
 module.exports = router;
