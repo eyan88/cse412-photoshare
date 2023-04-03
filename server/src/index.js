@@ -4,9 +4,9 @@ require('dotenv').config();
 
 
 const app = express();
-const postRouter = require('../routes/postRouter');
-const userRouter = require('../routes/userRouter');
-const friendRouter = require('../routes/friendRouter');
+const postRouter = require('./routes/postRouter');
+const userRouter = require('./routes/userRouter');
+const friendRouter = require('./routes/friendRouter');
 
 const PORT = process.env.PORT || 5000;
 

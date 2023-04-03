@@ -1,7 +1,6 @@
-const { response } = require('express');
 const bcrypt = require('bcrypt');
 
-// Unique IDs will be generated with this (not using SERIAL command for postgres)
+// Unique IDs will be generated with this (for album and photos) (not using SERIAL command for postgres)
 // except for users table (dont want to restructure the entire table)
 const uniqid = require('uniqid');
 

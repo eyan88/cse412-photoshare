@@ -7,5 +7,6 @@ router.route('/')
 
 router.route('/:id')
     .get(friendCtrl.getFriendsOfUserId);
+
     
 module.exports = router;
