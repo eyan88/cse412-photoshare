@@ -3,10 +3,10 @@ const commentCtrl = require('../controllers/commentCtrl');
 const auth = require('../middleware/auth');
 
 router.route('/')
-    .get(commentCtrl.getAllPosts)
-    .post(commentCtrl.createPost);
+    .get(commentCtrl.getAllComments)
+    .post(commentCtrl.createComment);
 
 router.route('/:id')
-    .get(commentCtrl.getPostsByUserId);
+    .get(commentCtrl.getCommentsOnPost);
 
 module.exports = router;
