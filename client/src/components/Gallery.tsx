@@ -3,29 +3,25 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Gallery = () => {
-    const firstPost = {
-        photo_id: 1,
-        caption: "harbor",
-        photo_date: "2022-01-10",
-        album_id: 2,
-        user_id: 1,
-    };
-
-    const secondPost = {
-        photo_id: 2,
-        caption: "harbor2",
-        photo_date: "2022-01-10",
-        album_id: 2,
-        user_id: 1,
-    };
 
     const [gallery, setGallery] = useState<any[]>([]);
 
     // get all distinct posts from database and map to array
     // then do a Array.map function to render Posts components
-    const getGallery = () => {
-        const updatedPosts = [firstPost, secondPost];
-        setGallery(updatedPosts);
+    const getGallery = async () => {
+        try {
+            const res = await fetch('http://localhost:5000/api/posts', {
+                method: 'GET',
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    setGallery(data);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
     };
 
     // reset gallery on page refresh and load
@@ -38,10 +34,10 @@ const Gallery = () => {
             <h1 className="text-3xl">Gallery</h1>
             <div className="mt-4 grid gap-8 lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-1">
                 {gallery.map((post) => (
-                    <Post 
-                        photo_id={post.photo_id}
+                    <Post
+                        key={post.photo_id}
                         caption={post.caption}
-                        photo_date={post.photo_date}
+                        photo_date={post.date_of_photo}
                         album_id={post.album_id}
                         user_id={post.user_id}
                     />
@@ -49,7 +45,6 @@ const Gallery = () => {
             </div>
         </div>
     )
-
 }
 
 export default Gallery;
