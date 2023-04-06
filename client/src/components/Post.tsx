@@ -23,22 +23,22 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
         // in the gallery. This page should house all comments and likes of that post.
 
         <Link to={`/posts/${photo_id}`}>
-            <div className="max-w-sm w-full lg:flex">
-
-                <div className="lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
-                    <img className="object-center max-w-sm" src="https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt30cd60b083954711/634896353b9a3d285e1b6cc1/patch508_Banner.jpg"></img>
+            <div className='w-full border flex flex-col'>
+                <div className='flex flex-col m-2'>
+                    <div className="text-sm flex flex-row place-content-between">
+                        <p className="text-gray-900 leading-none font-bold">{`${name}`}</p>
+                        <p className="text-gray-600">{`${photo_date}`}</p>
+                    </div>
                 </div>
 
-                <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white p-4 flex flex-col justify-between leading-normal">
-                    <div className="mb-8">
+                <div className="">
+                    <img className="w-full max-h-[500px]" src='https://img.redbull.com/images/c_crop,w_1140,h_570,x_0,y_0,f_auto,q_auto/c_scale,w_1200/redbullcom/2023/1/24/ngljfqaupmiywuqas5tl/harbor-valorant' alt="" />
+                </div>
+
+                <div>
+                    <div className="m-4">
                         <div className="text-gray-900 font-bold text-xl mb-2">{`${caption}`}</div>
-                    </div>
-                    <div className="flex items-center">
-                        <div className="text-sm">
-                            <p className="text-gray-900 leading-none">{`${name}`}</p>
-                            <p className="text-gray-600">{`${photo_date}`}</p>
-                            <p className="text-gray-700 text-[10px]">#tag #valorant #harbor #inting #overflow</p>
-                        </div>
+                        <p className="text-gray-700 text-[10px]">#tag #valorant #harbor #inting #overflow</p>
                     </div>
                 </div>
             </div>

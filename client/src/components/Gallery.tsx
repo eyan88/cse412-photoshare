@@ -15,7 +15,6 @@ const Gallery = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
                     setGallery(data);
                 })
         }
@@ -36,6 +35,7 @@ const Gallery = () => {
                 {gallery.map((post) => (
                     <Post
                         key={post.photo_id}
+                        photo_id={post.photo_id}
                         caption={post.caption}
                         photo_date={post.date_of_photo}
                         album_id={post.album_id}
