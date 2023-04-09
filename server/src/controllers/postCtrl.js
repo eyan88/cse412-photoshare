@@ -18,6 +18,15 @@ const postCtrl = {
       res.status(200).json(result.rows);
     });
   },
+  getPostById: async (req, res) => {
+    const photo_id = req.params.id;
+    await pool.query(
+      `SELECT * FROM photo WHERE photo_id = '${photo_id}'`,
+      (err, result) => {
+        res.status(200).json(result.rows);
+      }
+    );
+  },
   getPostsByUserId: async (req, res) => {
     const user_id = parseInt(req.params.id);
     await pool.query(

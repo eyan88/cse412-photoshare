@@ -1,4 +1,4 @@
-const uniqid = require('uniqid');
+const uniqid = require("uniqid");
 const Pool = require("pg").Pool;
 
 const pool = new Pool({
@@ -9,32 +9,54 @@ const pool = new Pool({
   port: 5432,
 });
 
-const postCtrl = {
-    getAllPosts: async (req, res) => {
-        await pool.query('SELECT * FROM photo', (err, result) => {
+const createTag = async (tag_id, tag_text) => {
+  await pool.query(
+    `INSERT INTO tag(tag_id, tag_text)
+      VALUES ('${tag_id}', '${tag_text}')`,
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+    }
+  );
+};
+
+const tagCtrl = {
+  getAllTags: async (req, res) => {
+    await pool.query("SELECT * FROM phototags", (err, result) => {
+      if (err) {
+        throw err;
+      }
+      res.status(200).json(result.rows);
+    });
+  },
+  getTagsOnPostId: async (req, res) => {
+    const photo_id = req.params.id;
+    await pool.query(
+      `SELECT DISTINCT tag.tag_id FROM phototags, tag WHERE photo_id = '${photo_id}'`,
+      (err, result) => {
+        res.status(200).json(result.rows);
+      }
+    );
+  },
+  createTagOnPhoto: async (req, res) => {
+    const { photo_id, tag_text } = req.body;
+    const phototag_id = uniqid();
+    const tag_id = uniqid();
+    await createTag(tag_id, tag_text);
+    await pool.query(
+      pool.query(
+        `INSERT INTO phototags(phototag_id, photo_id, tag_id)
+          VALUES('${phototag_id}', '${photo_id}', '${tag_id}')`,
+        (err, result) => {
           if (err) {
             throw err;
           }
-          res.status(200).json(result.rows);
-        })
-    },
-    getPostsByUserId: async (req, res) => {
-      const user_id = parseInt(req.params.id);
-      await pool.query(`SELECT * FROM photo WHERE user_id = ${user_id}`, (err, result) => {
-        res.status(200).json(result.rows);
-      })
-    },
-    createPost: async (req, res) => {
-      const { caption, date_of_photo, user_id, album_id, image_path } = req.body;
-      const photo_id = uniqid();
-      await pool.query(`INSERT INTO photo(photo_id, caption, date_of_photo, user_id, album_id, image_path)
-                        VALUES('${photo_id}', '${caption}', '${date_of_photo}', ${user_id}, ${album_id}, '${image_path}')`, (err, result) => {
-                          if (err) {
-                            throw err;
-                          }
-                          res.status(200).send('photo added successfully');
-                        })
-    },
-}
+          res.status(200).send("photo added successfully");
+        }
+      )
+    );
+  },
+};
 
-module.exports = postCtrl;
+module.exports = tagCtrl;

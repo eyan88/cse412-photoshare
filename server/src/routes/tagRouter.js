@@ -3,10 +3,10 @@ const tagCtrl = require('../controllers/tagCtrl');
 const auth = require('../middleware/auth');
 
 router.route('/')
-    .get(tagCtrl.getAllPosts)
-    .post(tagCtrl.createPost);
+    .get(tagCtrl.getAllTags)
+    .post(tagCtrl.createTagOnPhoto);
 
 router.route('/:id')
-    .get(tagCtrl.getPostsByUserId);
+    .get(tagCtrl.getTagsOnPostId);
 
 module.exports = router;

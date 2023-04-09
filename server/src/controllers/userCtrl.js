@@ -16,14 +16,7 @@ const pool = new Pool({
 
 async function hashPassword(password) {
   const saltRounds = 10;
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(hash);
-    });
-  });
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
   return hashedPassword;
 }
 
@@ -60,7 +53,7 @@ const userCtrl = {
       hometown,
       gender,
     } = req.body;
-
+    console.log(req.body);
     const hash = await hashPassword(password);
     await pool.query(
       `INSERT INTO users(first_name, last_name, email, password, date_of_birth, hometown, gender, user_id)
