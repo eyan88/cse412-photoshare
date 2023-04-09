@@ -1,7 +1,7 @@
 start and stop postgresql with sudo service postgresql start / stop
 
 need to migrate postgresql local to AWS RDS
-finish endpoints, then work on frontend over last
+finish endpoints, then work on frontend over last week to get as much UI done as possible
 
 
 ------- ENDPOINTS -------
