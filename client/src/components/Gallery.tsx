@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Gallery = () => {
-
     const [gallery, setGallery] = useState<any[]>([]);
 
     // get all distinct posts from database and map to array

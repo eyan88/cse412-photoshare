@@ -7,6 +7,7 @@ import {
 import Root from './routes/Root';
 import Login from './routes/Login';
 import Gallery from './components/Gallery';
+import LargePost from './components/LargePost';
 import './index.css'
 
 const router = createBrowserRouter([
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/posts/:photo_id',
-        element: <div>This is where a post should go</div>
+        element: <LargePost />
       },
       {
         path: '/loginpage',

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import formatDate from '../utils/formatDate';
 
-const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?: string, caption?: string, photo_date?: string, album_id?: number, user_id: string }) => {
+const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?: string, caption?: string, photo_date: string, album_id: string, user_id: string }) => {
     const [name, setName] = useState('');
 
     //TODO: get the user who posted a post from the user_id prop
@@ -27,7 +28,7 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
                 <div className='flex flex-col m-2'>
                     <div className="text-sm flex flex-row place-content-between">
                         <p className="text-gray-900 leading-none font-bold">{`${name}`}</p>
-                        <p className="text-gray-600">{`${photo_date}`}</p>
+                        <p className="text-gray-600">{`${formatDate(photo_date)}`}</p>
                     </div>
                 </div>
 
@@ -46,4 +47,4 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
     )
 }
 
-export default Post
+export default Post;
