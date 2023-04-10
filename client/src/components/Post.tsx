@@ -5,7 +5,7 @@ import formatDate from '../utils/formatDate';
 const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?: string, caption?: string, photo_date: string, album_id: string, user_id: string }) => {
     const [name, setName] = useState('');
 
-    //TODO: get the user who posted a post from the user_id prop
+    //TODO: get the name of user who posted a post from the user_id prop
     const getName = async () => {
         await fetch(`http://localhost:5000/api/users/${user_id}`)
             .then((res) => res.json())

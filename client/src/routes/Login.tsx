@@ -72,15 +72,15 @@ const Login = () => {
             mode: 'cors',
             body: JSON.stringify(registerData),
         })
-        .then((response => {
-            if(!response.ok) {
-                throw new Error(`status code: ${response.status} - Email may already exist`);
-            }
-            return response;
-        }))
-        .then((response) => response.json())
-        .then(() => alert('Registered'))
-        .catch((error) => alert(error));
+            .then((response => {
+                if (!response.ok) {
+                    throw new Error(`status code: ${response.status} - Email may already exist`);
+                }
+                return response;
+            }))
+            .then((response) => response.json())
+            .then(() => alert('Registered'))
+            .catch((error) => alert(error));
     }
 
     // TODO: Add Submit function to submit to backend for login user (JWT)
@@ -93,22 +93,22 @@ const Login = () => {
             method: 'POST',
             body: JSON.stringify(loginData),
         })
-        .then(response => {
-            if(!response.ok) {
-                alert('Invalid login')
-                return;
-            }
-            return response.json();
-        })
-        .then((data) => {
-            if(data) {
-                localStorage.setItem('token', data.token);
-                alert('successful login');
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then(response => {
+                if (!response.ok) {
+                    alert('Invalid login')
+                    return;
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data) {
+                    localStorage.setItem('token', data.token);
+                    alert('successful login');
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
@@ -117,38 +117,80 @@ const Login = () => {
             <h1 className='text-3xl mt-4 mb-4'>Register</h1>
             <form className='flex flex-col' onSubmit={registerSubmit}>
                 <label className=''>Email:
-                    <input type='email' name='email' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='email'
+                        name='email'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>Password:
-                    <input type='password' name='password' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='password'
+                        name='password'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>First Name:
-                    <input type='text' name='first_name' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='text'
+                        name='first_name'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>Last Name:
-                    <input type='text' name='last_name' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='text'
+                        name='last_name'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>Date of Birth:
-                    <input type='date' name='date_of_birth' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='date'
+                        name='date_of_birth'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>Home Town:
-                    <input type='text' name='hometown' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='text'
+                        name='hometown'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>Gender:
-                    <input type='text' name='gender' onChange={handleOnChangeRegister} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='text'
+                        name='gender'
+                        onChange={handleOnChangeRegister}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
-                <input type='submit' value='Register' className='bg-gray-900 text-gray-300 p-2 rounded w-28 hover:bg-gray-700'></input>
+                <input
+                    type='submit'
+                    value='Register'
+                    className='bg-gray-900 text-gray-300 p-2 rounded w-28 hover:bg-gray-700'></input>
             </form>
 
             <h1 className='text-3xl mt-4 mb-4'>Login</h1>
             <form className='flex flex-col' onSubmit={loginSubmit}>
                 <label>Email:
-                    <input type='email' name='email' onChange={handleOnChangeLogin} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='email'
+                        name='email'
+                        onChange={handleOnChangeLogin}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
                 <label>Password
-                    <input type='password' name='password' onChange={handleOnChangeLogin} className='mx-4 my-2 border border-black'></input>
+                    <input
+                        type='password'
+                        name='password'
+                        onChange={handleOnChangeLogin}
+                        className='mx-4 my-2 border border-black'></input>
                 </label>
-                <input type='submit' value='Login' className='bg-gray-900 text-gray-300 p-2 rounded w-28 hover:bg-gray-700'></input>
+                <input
+                    type='submit'
+                    value='Login'
+                    className='bg-gray-900 text-gray-300 p-2 rounded w-28 hover:bg-gray-700'></input>
             </form>
 
         </div>
