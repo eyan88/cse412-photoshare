@@ -1,0 +1,27 @@
+start and stop postgresql with sudo service postgresql start / stop
+
+need to migrate postgresql local to AWS RDS
+finish endpoints, then work on frontend over last week to get as much UI done as possible
+
+
+------- ENDPOINTS -------
+
+GET /api/users
+POST /api/users
+DELETE /api/users/:id
+
+POST /api/friends
+GET /api/friends/:id
+
+GET /api/posts
+GET /api/posts/:id
+POST /api/posts
+
+GET /api/albums
+GET /api/albums/:id
+GET /api/albums/user/:id
+POST /api/albums
+
+GET /api/comments
+GET /api/comments/:id
+POST /api/comments
