@@ -1,11 +1,17 @@
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Sidebar = () => {
+const Sidebar = ({ isLoggedIn, setIsLoggedIn }: { isLoggedIn?: boolean, setIsLoggedIn?: any }) => {
 
     //TODO: add search functionality for photos
 
     //TODO: add album page for user
+
+    // on window refresh, check for token
+    useEffect(() => {
+        localStorage.getItem('token') ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    }, [])
 
     return (
         <>

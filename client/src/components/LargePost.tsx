@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import formatDate from "../utils/formatDate";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import formatDate from '../utils/formatDate';
 
 
 const LargePost = () => {
@@ -55,8 +55,8 @@ const LargePost = () => {
         <>
             <div>
                 <div>
-                    <h1 className="text-3xl font-bold mb-4">{postInfo.caption}</h1>
-                    <div className="mb-4 flex flex-col">
+                    <h1 className='text-3xl font-bold mb-4'>{postInfo.caption}</h1>
+                    <div className='mb-4 flex flex-col'>
                         <div>{postInfo.user_id}</div>
                         <div>{formatDate(postInfo.date_of_photo)}</div>
                         <div>{postInfo.photo_id}</div>
@@ -64,25 +64,25 @@ const LargePost = () => {
                     </div>
                 </div>
 
-                <h2 className="text-xl font-bold mb-2">Comments</h2>
-                <ul className="space-y-2">
+                <h2 className='text-xl font-bold mb-2'>Comments</h2>
+                <ul className='space-y-2'>
                     {comments.map((comment, index) => (
-                        <li key={index} className="border-b pb-2">{comment}</li>
+                        <li key={index} className='border-b pb-2'>{comment}</li>
                     ))}
                 </ul>
 
                 <form onSubmit={handleSubmit}>
-                    <label className="block mb-2 font-bold">
+                    <label className='block mb-2 font-bold'>
                         Add a comment:
                         <input
-                            type="text"
+                            type='text'
                             value={newComment}
                             onChange={handleCommentChange}
-                            className="w-full border py-2 px-3 mb-2" />
+                            className='w-full border py-2 px-3 mb-2' />
                     </label>
                     <button
-                        type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                        type='submit'
+                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
                 </form>
             </div>
         </>
