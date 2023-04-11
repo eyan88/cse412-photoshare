@@ -55,12 +55,11 @@ const LargePost = () => {
         <>
             <div>
                 <div>
-                    <h1 className="text-3xl font-bold mb-4">Post Title</h1>
+                    <h1 className="text-3xl font-bold mb-4">{postInfo.caption}</h1>
                     <div className="mb-4 flex flex-col">
                         <div>{postInfo.user_id}</div>
                         <div>{formatDate(postInfo.date_of_photo)}</div>
                         <div>{postInfo.photo_id}</div>
-                        <div>{postInfo.caption}</div>
                         <div>{postInfo.image_path}</div>
                     </div>
                 </div>

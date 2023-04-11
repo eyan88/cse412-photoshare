@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Root from './routes/Root';
 import Login from './routes/Login';
+import Upload from './routes/Upload';
 import Gallery from './components/Gallery';
 import LargePost from './components/LargePost';
 import './index.css'
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/loginpage',
         element: <Login />,
+      },
+      {
+        path: '/upload',
+        element: <Upload />
       }
     ]
   },

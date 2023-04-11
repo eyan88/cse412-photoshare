@@ -24,7 +24,7 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
         // in the gallery. This page should house all comments and likes of that post.
 
         <Link to={`/posts/${photo_id}`}>
-            <div className='w-full border flex flex-col'>
+            <div className='w-full border flex flex-col rounded-lg border-2 hover:border-blue-700 duration-100'>
                 <div className='flex flex-col m-2'>
                     <div className="text-sm flex flex-row place-content-between">
                         <p className="text-gray-900 leading-none font-bold">{`${name}`}</p>
@@ -33,7 +33,7 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
                 </div>
 
                 <div className="">
-                    <img className="w-full max-h-[500px]" src='https://img.redbull.com/images/c_crop,w_1140,h_570,x_0,y_0,f_auto,q_auto/c_scale,w_1200/redbullcom/2023/1/24/ngljfqaupmiywuqas5tl/harbor-valorant' alt="" />
+                    <img className="w-full max-h-[500px]" src='https://cdn.firstcuriosity.com/wp-content/uploads/2022/12/17132851/Aki-Hayakawa-1-1024x576-1-696x392.webp' alt="" />
                 </div>
 
                 <div>
