@@ -89,7 +89,7 @@ const userCtrl = {
           }
           
           // send back unique token
-          const payload = { id: result.rows[0].user_id, name: result.rows[0].name };
+          const payload = { user_id: result.rows[0].user_id, name: result.rows[0].name };
           const token = jwt.sign(payload, TOKEN, {
             expiresIn: '1d',
           });

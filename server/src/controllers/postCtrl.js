@@ -1,5 +1,6 @@
 const uniqid = require("uniqid");
 const Pool = require("pg").Pool;
+const jwt = require('jsonwebtoken');
 
 const pool = new Pool({
   user: "me",
@@ -37,16 +38,29 @@ const postCtrl = {
     );
   },
   createPost: async (req, res) => {
-    const { caption, date_of_photo, user_id, album_id, image_path } = req.body;
+    const { caption, date_of_photo } = req.body;
+    const file = req.file;
+
+    // grab userID from authorization token
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, 'privatekey')
+    const user_id = decodedToken.user_id;
+
+    // format date as date object to convert to ISO string
+    const dateFormatted = new Date(date_of_photo);
+
+    // generate photoid
     const photo_id = uniqid();
+    const album_id = null;
+
     await pool.query(
       `INSERT INTO photo(photo_id, caption, date_of_photo, user_id, album_id, image_path)
-      VALUES('${photo_id}', '${caption}', '${date_of_photo}', ${user_id}, ${album_id}, '${image_path}')`,
+      VALUES('${photo_id}', '${caption}', '${dateFormatted.toISOString()}', ${user_id}, ${album_id}, '${file.path}')`,
       (err, result) => {
         if (err) {
           throw err;
         }
-        res.status(200).send("photo added successfully");
+        res.status(200).json("photo added successfully");
       }
     );
   },
