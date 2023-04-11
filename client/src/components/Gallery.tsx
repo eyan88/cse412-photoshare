@@ -37,6 +37,7 @@ const Gallery = () => {
                         photo_id={post.photo_id}
                         caption={post.caption}
                         photo_date={post.date_of_photo}
+                        image_path={post.image_path}
                         album_id={post.album_id}
                         user_id={post.user_id}
                     />

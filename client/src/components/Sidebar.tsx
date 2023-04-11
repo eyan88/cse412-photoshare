@@ -15,7 +15,7 @@ const Sidebar = ({ isLoggedIn, setIsLoggedIn }: { isLoggedIn?: boolean, setIsLog
 
     return (
         <>
-            <div className='flex flex-row justify-between items-center h-full text-gray-300 bg-gray-900'>
+            <div className='flex flex-row justify-between items-center text-gray-300 bg-gray-900'>
                 <h1 className='m-2'> PhotoShare </h1>
                 <div className='flex flex-row items-center border-gray-700'>
                     <Link to='gallery' className='flex items-center justify-center w-24 h-12 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 duration-100'>

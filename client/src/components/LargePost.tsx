@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
 
+const url = 'http://localhost:5000/';
 
 const LargePost = () => {
     const [postInfo, setPostInfo] = useState({
@@ -56,11 +57,11 @@ const LargePost = () => {
             <div>
                 <div>
                     <h1 className='text-3xl font-bold mb-4'>{postInfo.caption}</h1>
-                    <div className='mb-4 flex flex-col'>
+                    <div className='mb-4 flex flex-col items-center content-center'>
                         <div>{postInfo.user_id}</div>
                         <div>{formatDate(postInfo.date_of_photo)}</div>
                         <div>{postInfo.photo_id}</div>
-                        <div>{postInfo.image_path}</div>
+                        <img className='w-5/6' src={url + postInfo.image_path}></img>
                     </div>
                 </div>
 

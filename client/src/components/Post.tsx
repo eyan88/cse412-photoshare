@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
 
-const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?: string, caption?: string, photo_date: string, album_id: string, user_id: string }) => {
+const url = 'http://localhost:5000/';
+
+const Post = ({ photo_id, caption, photo_date, image_path, album_id, user_id }: { photo_id?: string, caption?: string, photo_date: string, image_path:string, album_id: string, user_id: string }) => {
     const [name, setName] = useState('');
 
     //TODO: get the name of user who posted a post from the user_id prop
@@ -33,7 +35,7 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
                 </div>
 
                 <div className="">
-                    <img className="w-full max-h-[500px]" src='https://cdn.firstcuriosity.com/wp-content/uploads/2022/12/17132851/Aki-Hayakawa-1-1024x576-1-696x392.webp' alt="" />
+                    <img className="w-full max-h-[500px]" src={url + image_path} alt="" />
                 </div>
 
                 <div>
