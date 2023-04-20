@@ -29,8 +29,8 @@ const Post = ({ photo_id, caption, photo_date, image_path, album_id, user_id }: 
             <div className='w-full border flex flex-col rounded-lg border-2 hover:border-blue-700 duration-100'>
                 <div className='flex flex-col m-2'>
                     <div className="text-sm flex flex-row place-content-between">
-                        <p className="text-gray-900 leading-none font-bold">{`${name}`}</p>
-                        <p className="text-gray-600">{`${formatDate(photo_date)}`}</p>
+                        <p className="text-gray-900 leading-none font-bold">{name}</p>
+                        <p className="text-gray-600">{formatDate(photo_date)}</p>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@ const Post = ({ photo_id, caption, photo_date, image_path, album_id, user_id }: 
 
                 <div>
                     <div className="m-4">
-                        <div className="text-gray-900 font-bold text-xl mb-2">{`${caption}`}</div>
+                        <div className="text-gray-900 font-bold text-xl mb-2">{caption}</div>
                         <p className="text-gray-700 text-[10px]">#tag #valorant #harbor #inting #overflow</p>
                     </div>
                 </div>

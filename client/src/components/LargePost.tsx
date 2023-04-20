@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
+import Comments from './Comments';
 
 const url = 'http://localhost:5000/';
 
@@ -14,8 +15,7 @@ const LargePost = () => {
         image_path: ''
     });
 
-    const [comments, setComments] = useState<any[]>([]);
-    const [newComment, setNewComment] = useState('');
+    const [name, setName] = useState('');
 
     // get the photo_id param from URL
     const { photo_id } = useParams();
@@ -36,57 +36,51 @@ const LargePost = () => {
         }
     };
 
-    const handleCommentChange = (e: any) => {
-        setNewComment(e.target.value);
-    };
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        setComments([...comments, newComment]);
-        setNewComment('');
-    };
+    const getName = async () => {
+        await fetch(`http://localhost:5000/api/users/${postInfo.user_id}`)
+            .then((res) => res.json())
+            .then((res) => {
+                setName(res[0].first_name + " " + res[0].last_name);
+            })
+    }
 
     // update photo info
     useEffect(() => {
         getPostDetails();
+        getName();
     }, []);
 
     // second div is for comments section
     return (
-        <>
-            <div>
+
+        <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+            <div className="flex items-center mb-4">
                 <div>
-                    <h1 className='text-3xl font-bold mb-4'>{postInfo.caption}</h1>
-                    <div className='mb-4 flex flex-col items-center content-center'>
-                        <div>{postInfo.user_id}</div>
-                        <div>{formatDate(postInfo.date_of_photo)}</div>
-                        <div>{postInfo.photo_id}</div>
-                        <img className='w-5/6' src={url + postInfo.image_path}></img>
-                    </div>
+                    <p className="font-semibold">{name}</p>
+                    <p className="text-gray-500">{`@${name} • ${formatDate(postInfo.date_of_photo)}`}</p>
                 </div>
-
-                <h2 className='text-xl font-bold mb-2'>Comments</h2>
-                <ul className='space-y-2'>
-                    {comments.map((comment, index) => (
-                        <li key={index} className='border-b pb-2'>{comment}</li>
-                    ))}
-                </ul>
-
-                <form onSubmit={handleSubmit}>
-                    <label className='block mb-2 font-bold'>
-                        Add a comment:
-                        <input
-                            type='text'
-                            value={newComment}
-                            onChange={handleCommentChange}
-                            className='w-full border py-2 px-3 mb-2' />
-                    </label>
-                    <button
-                        type='submit'
-                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Submit</button>
-                </form>
             </div>
-        </>
+            <div className='flex flex-col content-center items-center'>
+                <img
+                    className="m-4"
+                    src={url + postInfo.image_path}
+                    alt=''
+                />
+            </div>
+            <p className="text-lg mb-4">{postInfo.caption}</p>
+            <div className="flex justify-between">
+                <div>
+                    <span className="text-gray-500">{ }4 likes</span>
+                </div>
+                <div>
+                    <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-100">
+                        Like
+                    </button>
+                </div>
+            </div>
+
+            <Comments/>
+        </div>
     )
 }
 
