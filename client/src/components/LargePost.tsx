@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
-import Comments from './Comments';
+import CommentSection from './CommentSection';
 
 const url = 'http://localhost:5000/';
 
@@ -88,9 +88,7 @@ const LargePost = () => {
         getLikes();
     }, [likes]);
 
-    // second div is for comments section
     return (
-
         <div className="bg-white rounded-lg shadow-md p-6 mb-4">
             <div className="flex items-center mb-4">
                 <div>
@@ -102,7 +100,7 @@ const LargePost = () => {
                 <img
                     className="m-4"
                     src={url + postInfo.image_path}
-                    alt=''
+                    alt={'image of ' + postInfo.image_path}
                 />
             </div>
             <p className="text-lg mb-4">{postInfo.photo_id}</p>
@@ -117,7 +115,7 @@ const LargePost = () => {
                 </div>
             </div>
 
-            <Comments />
+            <CommentSection />
         </div>
     )
 }
