@@ -34,7 +34,6 @@ const ImageUploadForm = () => {
       console.log(response);
       setIsUploading(false);
     });
-    // TODO: Handle image upload
   }
 
   return (

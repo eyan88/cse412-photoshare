@@ -16,6 +16,7 @@ const LargePost = () => {
     });
 
     const [name, setName] = useState('');
+    const [likes, setLikes] = useState(0);
 
     // get the photo_id param from URL
     const { photo_id } = useParams();
@@ -37,18 +38,55 @@ const LargePost = () => {
     };
 
     const getName = async () => {
-        await fetch(`http://localhost:5000/api/users/${postInfo.user_id}`)
-            .then((res) => res.json())
-            .then((res) => {
-                setName(res[0].first_name + " " + res[0].last_name);
+        try {
+            await fetch(`http://localhost:5000/api/users/${postInfo.user_id}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    setName(res[0].first_name + " " + res[0].last_name);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    const getLikes = async () => {
+        try {
+            await fetch(`http://localhost:5000/api/likes/${photo_id}`)
+                .then((res) => res.json())
+                .then((res) => {
+                    setLikes(res[0].count);
+                })
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    const submitLike = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            await fetch(`http://localhost:5000/api/likes/${photo_id}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
             })
+                .then(res => {
+                    getLikes();
+                });
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     // update photo info
     useEffect(() => {
         getPostDetails();
         getName();
-    }, []);
+        getLikes();
+    }, [likes]);
 
     // second div is for comments section
     return (
@@ -67,19 +105,19 @@ const LargePost = () => {
                     alt=''
                 />
             </div>
-            <p className="text-lg mb-4">{postInfo.caption}</p>
+            <p className="text-lg mb-4">{postInfo.photo_id}</p>
             <div className="flex justify-between">
                 <div>
-                    <span className="text-gray-500">{ }4 likes</span>
+                    <span className="text-gray-500">{likes} likes</span>
                 </div>
                 <div>
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-100">
+                    <button onClick={submitLike} className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-100">
                         Like
                     </button>
                 </div>
             </div>
 
-            <Comments/>
+            <Comments />
         </div>
     )
 }
