@@ -103,7 +103,7 @@ const LargePost = () => {
                     alt={'image of ' + postInfo.image_path}
                 />
             </div>
-            <p className="text-lg mb-4">{postInfo.photo_id}</p>
+            <p className="text-lg mb-4">{postInfo.caption}</p>
             <div className="flex justify-between">
                 <div>
                     <span className="text-gray-500">{likes} likes</span>
