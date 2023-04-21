@@ -166,7 +166,7 @@ const LoginForm = () => {
                 <input
                     type='submit'
                     value='Register'
-                    className='bg-gray-900 text-gray-300 p-2 rounded w-28 hover:bg-gray-700'></input>
+                    className='bg-blue-500 w-28 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline duration-100'></input>
             </form>
 
             <h1 className='text-3xl mt-4 mb-4'>Login</h1>
@@ -188,7 +188,7 @@ const LoginForm = () => {
                 <input
                     type='submit'
                     value='Login'
-                    className='bg-gray-900 text-gray-300 p-2 rounded w-28 hover:bg-gray-700'></input>
+                    className='bg-blue-500 w-28 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline duration-100'></input>
             </form>
         </div>
     )

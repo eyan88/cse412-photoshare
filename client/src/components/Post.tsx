@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
 
-const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?: string, caption?: string, photo_date: string, album_id: string, user_id: string }) => {
+const url = 'http://localhost:5000/';
+
+const Post = ({ photo_id, caption, photo_date, image_path, album_id, user_id }: { photo_id?: string, caption?: string, photo_date: string, image_path:string, album_id: string, user_id: string }) => {
     const [name, setName] = useState('');
 
     //TODO: get the name of user who posted a post from the user_id prop
@@ -27,18 +29,18 @@ const Post = ({ photo_id, caption, photo_date, album_id, user_id }: { photo_id?:
             <div className='w-full border flex flex-col rounded-lg border-2 hover:border-blue-700 duration-100'>
                 <div className='flex flex-col m-2'>
                     <div className="text-sm flex flex-row place-content-between">
-                        <p className="text-gray-900 leading-none font-bold">{`${name}`}</p>
-                        <p className="text-gray-600">{`${formatDate(photo_date)}`}</p>
+                        <p className="text-gray-900 leading-none font-bold">{name}</p>
+                        <p className="text-gray-600">{formatDate(photo_date)}</p>
                     </div>
                 </div>
 
                 <div className="">
-                    <img className="w-full max-h-[500px]" src='https://cdn.firstcuriosity.com/wp-content/uploads/2022/12/17132851/Aki-Hayakawa-1-1024x576-1-696x392.webp' alt="" />
+                    <img className="w-full max-h-[500px]" src={url + image_path} alt="" />
                 </div>
 
                 <div>
                     <div className="m-4">
-                        <div className="text-gray-900 font-bold text-xl mb-2">{`${caption}`}</div>
+                        <div className="text-gray-900 font-bold text-xl mb-2">{caption}</div>
                         <p className="text-gray-700 text-[10px]">#tag #valorant #harbor #inting #overflow</p>
                     </div>
                 </div>
