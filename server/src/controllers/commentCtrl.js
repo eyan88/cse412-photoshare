@@ -1,5 +1,6 @@
 const uniqid = require("uniqid");
 const Pool = require("pg").Pool;
+const jwt = require("jsonwebtoken");
 
 const pool = new Pool({
   user: "me",
@@ -28,7 +29,12 @@ const commentCtrl = {
     );
   },
   createComment: async (req, res) => {
-    const { photo_id, user_id, comment_text, date_of_comment } = req.body;
+    const { photo_id, comment_text, date_of_comment } = req.body;
+
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "privatekey");
+    const user_id = decodedToken.user_id;
+
     const comment_id = uniqid();
     await pool.query(
       `INSERT INTO comment(comment_id, photo_id, user_id, comment_text, date_of_comment)
