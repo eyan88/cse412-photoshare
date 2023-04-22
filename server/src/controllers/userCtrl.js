@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 // Unique IDs will be generated with this (for album and photos) (not using SERIAL command for postgres)
 // except for users table (dont want to restructure the entire table)
 const uniqid = require("uniqid");
-const TOKEN = 'privatekey';
+const TOKEN = "privatekey";
 
 const Pool = require("pg").Pool;
 const pool = new Pool({
@@ -43,6 +43,43 @@ const userCtrl = {
       }
     );
   },
+  getUserByName: async (req, res) => {
+    const { search } = req.body;
+    const name = search.split(" ");
+    const first_name = name[0];
+    const last_name = name[1];
+    if (!first_name && !last_name) {
+      await pool.query(
+        `SELECT * FROM users`,
+        (err, result) => {
+          if (err) {
+            throw error;
+          }
+          res.status(200).json(result.rows);
+        }
+      );
+    } else if (!last_name) {
+      await pool.query(
+        `SELECT * FROM users WHERE first_name='${first_name}'`,
+        (err, result) => {
+          if (err) {
+            throw error;
+          }
+          res.status(200).json(result.rows);
+        }
+      );
+    } else {
+      await pool.query(
+        `SELECT * FROM users WHERE first_name='${first_name}' AND last_name='${last_name}'`,
+        (err, result) => {
+          if (err) {
+            throw error;
+          }
+          res.status(200).json(result.rows);
+        }
+      );
+    }
+  },
   createUser: async (req, res) => {
     try {
       const {
@@ -66,7 +103,7 @@ const userCtrl = {
           return res.status(201).json("user created successfully");
         }
       );
-    } catch(err) {
+    } catch (err) {
       return res.status(500).json(err);
     }
   },
@@ -77,21 +114,28 @@ const userCtrl = {
         `SELECT * FROM users WHERE email = '${email}'`,
         async (err, result) => {
           // check if email exists
-          if(result.rows.length === 0) {
-            return res.status(400).json('email not found. please check your credentials or register a new account');
+          if (result.rows.length === 0) {
+            return res
+              .status(400)
+              .json(
+                "email not found. please check your credentials or register a new account"
+              );
           }
 
           // email found, check password
-          const userPassword = result.rows[0].password
+          const userPassword = result.rows[0].password;
           const match = await bcrypt.compare(password, userPassword);
           if (!match) {
-            return res.status(400).json('invalid password');
+            return res.status(400).json("invalid password");
           }
-          
+
           // send back unique token
-          const payload = { user_id: result.rows[0].user_id, name: result.rows[0].name };
+          const payload = {
+            user_id: result.rows[0].user_id,
+            name: result.rows[0].name,
+          };
           const token = jwt.sign(payload, TOKEN, {
-            expiresIn: '1d',
+            expiresIn: "1d",
           });
           return res.status(200).json({ token });
         }

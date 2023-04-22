@@ -3,9 +3,7 @@ const friendCtrl = require('../controllers/friendCtrl');
 const auth = require('../middleware/auth');
 
 router.route('/')
-    .post(friendCtrl.createFriendship);
-
-router.route('/:id')
+    .post(friendCtrl.createFriendship)
     .get(friendCtrl.getFriendsOfUserId);
 
     
