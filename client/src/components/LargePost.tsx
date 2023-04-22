@@ -6,6 +6,8 @@ import CommentSection from './CommentSection';
 const url = 'http://localhost:5000/';
 
 const LargePost = () => {
+    // TODO: view users who have liked a photo
+
     const [postInfo, setPostInfo] = useState({
         photo_id: '',
         caption: '',
@@ -39,7 +41,7 @@ const LargePost = () => {
 
     const getName = async () => {
         try {
-            await fetch(`http://localhost:5000/api/users/${postInfo.user_id}`)
+            await fetch(`http://localhost:5000/api/users/search/${postInfo.user_id}`)
                 .then((res) => res.json())
                 .then((res) => {
                     setName(res[0].first_name + " " + res[0].last_name);

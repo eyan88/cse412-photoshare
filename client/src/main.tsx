@@ -7,6 +7,7 @@ import {
 import Root from './routes/Root';
 import Login from './routes/Login';
 import Upload from './routes/Upload';
+import Friends from './routes/Friends';
 import Gallery from './components/Gallery';
 import LargePost from './components/LargePost';
 import './index.css'
@@ -28,13 +29,17 @@ const router = createBrowserRouter([
         element: <LargePost />
       },
       {
-        path: '/loginpage',
-        element: <Login />,
+        path: '/friends',
+        element: <Friends />
       },
       {
         path: '/upload',
         element: <Upload />
-      }
+      },
+      {
+        path: '/loginpage',
+        element: <Login />,
+      },
     ]
   },
 ])

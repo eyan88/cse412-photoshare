@@ -6,7 +6,7 @@ const Comment = ({ photo_id, user_id, comment_text, date_of_comment }: { photo_i
     const [name, setName] = useState('');
 
     const getName = async () => {
-        await fetch(`http://localhost:5000/api/users/${user_id}`)
+        await fetch(`http://localhost:5000/api/users/search/${user_id}`)
             .then((res) => res.json())
             .then((res) => {
                 setName(res[0].first_name + ' ' + res[0].last_name);
