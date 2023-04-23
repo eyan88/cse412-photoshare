@@ -38,9 +38,9 @@ const CommentSection = () => {
         await fetch(`http://localhost:5000/api/comments/${photo_id}`, {
             method: 'GET',
         })
-            .then((response) => response.json())
-            .then((data) => {
-                setComments(data);
+            .then((res) => res.json())
+            .then((res) => {
+                setComments(res);
             })
     }
 

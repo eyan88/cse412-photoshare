@@ -29,15 +29,15 @@ const ImageUploadForm = () => {
         'Authorization': `Bearer ${token}`,
       },
       body: formData
-    }).then(response => response.json())
-    .then(response => {
-      console.log(response);
+    }).then(res => res.json())
+    .then(res => {
+      console.log(res);
       setIsUploading(false);
     });
   }
 
   return (
-    <div className='max-w-md mx-auto'>
+    <div className='max-w-md mx-auto w-screen mt-4'>
       <form onSubmit={handleSubmit} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
 
         <label className='block text-gray-700 font-bold mb-2'>Title your post</label>

@@ -25,7 +25,7 @@ const Friends = () => {
         if (isLoggedIn) {
             getFriends();
         }
-    }, [friends])
+    })
 
     return (
         <>

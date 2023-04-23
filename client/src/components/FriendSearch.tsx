@@ -67,7 +67,7 @@ const FriendSearch = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
-            <div className='overflow-y-scroll'>
+            <div className='overflow-y-scroll h-96'>
                 {results?.map((result) => (
                     <AddFriend
                         key={result.user_id}

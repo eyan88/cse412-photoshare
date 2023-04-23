@@ -15,9 +15,9 @@ const Gallery = () => {
                     method: 'GET',
                 }
             )
-                .then((response) => response.json())
-                .then((data) => {
-                    setGallery(data);
+                .then((res) => res.json())
+                .then((res) => {
+                    setGallery(res);
                 })
         }
         catch (err) {
@@ -30,7 +30,7 @@ const Gallery = () => {
         if (isLoggedIn) {
             getGallery();
         }
-    }, []);
+    });
 
     return (
         <>

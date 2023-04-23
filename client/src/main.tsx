@@ -11,6 +11,7 @@ import Friends from './routes/Friends';
 import Gallery from './components/Gallery';
 import LargePost from './components/LargePost';
 import './index.css'
+import Albums from './routes/Albums';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/posts/:photo_id',
         element: <LargePost />
+      },
+      {
+        path: '/albums',
+        element: <Albums />
       },
       {
         path: '/friends',

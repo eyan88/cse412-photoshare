@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 
-
 const Friend = ({friend_of_user, date_of_friendship}:{friend_of_user?:any, date_of_friendship?:any}) => {
     const [name, setName] = useState('');
     
