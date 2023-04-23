@@ -11,6 +11,7 @@ router.route('/user/:id')
     .get(postCtrl.getPostsByUserId);
 
 router.route('/:id')
-    .get(postCtrl.getPostById);
+    .get(postCtrl.getPostById)
+    .delete(postCtrl.deletePost);
 
 module.exports = router;

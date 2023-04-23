@@ -10,12 +10,14 @@ const Gallery = () => {
     // then do a Array.map function to render Posts components
     const getGallery = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/posts', {
-                method: 'GET',
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    setGallery(data);
+            const res = await fetch('http://localhost:5000/api/posts',
+                {
+                    method: 'GET',
+                }
+            )
+                .then((res) => res.json())
+                .then((res) => {
+                    setGallery(res);
                 })
         }
         catch (err) {
@@ -25,8 +27,10 @@ const Gallery = () => {
 
     // reset gallery on page refresh and load
     useEffect(() => {
-        getGallery();
-    }, []);
+        if (isLoggedIn) {
+            getGallery();
+        }
+    });
 
     return (
         <>

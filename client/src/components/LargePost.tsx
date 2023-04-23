@@ -6,6 +6,8 @@ import CommentSection from './CommentSection';
 const url = 'http://localhost:5000/';
 
 const LargePost = () => {
+    // TODO: view users who have liked a photo
+
     const [postInfo, setPostInfo] = useState({
         photo_id: '',
         caption: '',
@@ -27,9 +29,9 @@ const LargePost = () => {
             const res = await fetch(`http://localhost:5000/api/posts/${photo_id}`, {
                 method: 'GET',
             })
-                .then((response) => response.json())
-                .then((data) => {
-                    setPostInfo(data[0]);
+                .then((res) => res.json())
+                .then((res) => {
+                    setPostInfo(res[0]);
                 })
         }
         catch (err) {
@@ -39,7 +41,7 @@ const LargePost = () => {
 
     const getName = async () => {
         try {
-            await fetch(`http://localhost:5000/api/users/${postInfo.user_id}`)
+            await fetch(`http://localhost:5000/api/users/search/${postInfo.user_id}`)
                 .then((res) => res.json())
                 .then((res) => {
                     setName(res[0].first_name + " " + res[0].last_name);
@@ -81,6 +83,19 @@ const LargePost = () => {
         }
     }
 
+    const deletePhoto = async () => {
+        const token = localStorage.getItem('token');
+        await fetch(`http://localhost:5000/api/posts/${photo_id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            })
+            .then((res) => res.json())
+            .then((res) => alert(res.msg))
+    }
+
     // update photo info
     useEffect(() => {
         getPostDetails();
@@ -90,11 +105,14 @@ const LargePost = () => {
 
     return (
         <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-            <div className="flex items-center mb-4">
+            <div className="flex flex-row justify-between items-center mb-4">
                 <div>
                     <p className="font-semibold">{name}</p>
                     <p className="text-gray-500">{`@${name} • ${formatDate(postInfo.date_of_photo)}`}</p>
                 </div>
+                <button onClick={deletePhoto} className="bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600 transition duration-100">
+                    Delete
+                </button>
             </div>
             <div className='flex flex-col content-center items-center'>
                 <img
