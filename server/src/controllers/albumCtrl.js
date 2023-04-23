@@ -1,5 +1,6 @@
 const uniqid = require("uniqid");
 const Pool = require("pg").Pool;
+const jwt = require("jsonwebtoken");
 
 const pool = new Pool({
   user: "me",
@@ -28,7 +29,10 @@ const albumCtrl = {
     );
   },
   getAlbumsByUserId: async (req, res) => {
-    const user_id = parseInt(req.params.id);
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "privatekey");
+    const user_id = decodedToken.user_id;
+
     await pool.query(
       `SELECT * FROM album WHERE user_id = ${user_id}`,
       (err, result) => {
@@ -37,16 +41,40 @@ const albumCtrl = {
     );
   },
   createAlbum: async (req, res) => {
-    const { album_name, user_id, date_of_album } = req.body;
+    const { album_name } = req.body;
+
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "privatekey");
+    const user_id = decodedToken.user_id;
+
+    const dateToday = new Date();
+
     const album_id = uniqid();
     await pool.query(
       `INSERT INTO album(album_id, album_name, user_id, date_of_album)
-      VALUES('${album_id}', '${album_name}', '${user_id}', '${date_of_album}')`,
+      VALUES('${album_id}', '${album_name}', '${user_id}', '${dateToday.toISOString()}')`,
       (err, result) => {
         if (err) {
           throw err;
         }
-        res.status(200).send("album added successfully");
+        res.status(200).send({ msg: "album added successfully" });
+      }
+    );
+  },
+  deleteAlbum: async (req, res) => {
+    const album_id = req.params.id;
+
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "privatekey");
+    const user_id = decodedToken.user_id;
+
+    await pool.query(
+      `DELETE FROM album WHERE album_id='${album_id}' AND user_id=${user_id}`,
+      (err, result) => {
+        if (err) {
+          throw err;
+        }
+        res.status(200).json({ msg: "album deleted successfully" });
       }
     );
   },

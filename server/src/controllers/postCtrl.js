@@ -1,6 +1,6 @@
 const uniqid = require("uniqid");
 const Pool = require("pg").Pool;
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const pool = new Pool({
   user: "me",
@@ -42,8 +42,8 @@ const postCtrl = {
     const file = req.file;
 
     // grab userID from authorization token
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'privatekey')
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "privatekey");
     const user_id = decodedToken.user_id;
 
     // format date as date object to convert to ISO string
@@ -55,12 +55,31 @@ const postCtrl = {
 
     await pool.query(
       `INSERT INTO photo(photo_id, caption, date_of_photo, user_id, album_id, image_path)
-      VALUES('${photo_id}', '${caption}', '${dateFormatted.toISOString()}', ${user_id}, ${album_id}, '${file.path}')`,
+      VALUES('${photo_id}', '${caption}', '${dateFormatted.toISOString()}', ${user_id}, ${album_id}, '${
+        file.path
+      }')`,
       (err, result) => {
         if (err) {
           throw err;
         }
-        res.status(200).json("photo added successfully");
+        res.status(200).json({ msg: "photo added successfully" });
+      }
+    );
+  },
+  deletePost: async (req, res) => {
+    const photo_id = req.params.id;
+
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, "privatekey");
+    const user_id = decodedToken.user_id;
+
+    await pool.query(
+      `DELETE FROM photo WHERE photo_id='${photo_id}' AND user_id=${user_id}`,
+      (err, result) => {
+        if (err) {
+          throw err;
+        }
+        res.status(200).json({ msg: "photo deleted successfully" });
       }
     );
   },

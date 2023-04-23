@@ -4,12 +4,12 @@ const auth = require('../middleware/auth');
 
 router.route('/')
     .get(albumCtrl.getAllAlbums)
-    .post(albumCtrl.createAlbum);
+    .post(albumCtrl.createAlbum)
 
 router.route('/:id')
-    .get(albumCtrl.getAlbumById);
+    .delete(albumCtrl.deleteAlbum)
 
-router.route('/user/:id')
+router.route('/user')
     .get(albumCtrl.getAlbumsByUserId);
 
 module.exports = router;
